@@ -1,3 +1,4 @@
+import { variationPlacements } from "@popperjs/core";
 import "../style/index.css";
 
 /**
@@ -29,18 +30,36 @@ function render(variables = {}) {
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
 
+  let twitter = '<a href="#"><i class="fab fa-twitter"></i></a>';
+  if(variables.twitter){
+    twitter = '<a href="https://twitter.com/' + variables.twitter + '" target="_blank"><i class="fab fa-twitter"></i></a>';
+  }
+  let github = '<a href="#"><i class="fab fa-github"></i></a>';
+  if(variables.github){
+    github = '<a href="https://github.com/' + variables.github + '" target="_blank"><i class="fab fa-github"></i></a>';
+  }
+  let linkedin = '<a href="#"><i class="fab fa-linkedin"></i></a>';
+  if(variables.linkedin){
+    linkedin = '<a href="https://linkedin.com/' + variables.linkedin + '" target="_blank"><i class="fab fa-linkedin"></i></a>';
+  }
+  let instagram = '<a href="#"><i class="fab fa-instagram"></i></a>';
+  if(variables.instagram){
+    instagram = '<a href="https://instagram.com/' + variables.instagram + '" target="_blank"><i class="fab fa-instagram"></i></a>';
+  }
+
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
           <img src="${variables.avatarURL}" class="photo" />
-          <h1>Lucy Boilett</h1>
-          <h2>Web Developer</h2>
-          <h3>Miami, USA</h3>
+          <h1>${variables.name ? variables.name:""} ${variables.lastname ? variables.lastname:""}<h1>
+          <h2>${variables.role ? variables.role : ""}</h2>
+          <h3>${variables.city ? variables.city:""} ${variables.country ? variables.country:""}</h3>
+          <ul class="${variables.socialMediaPosition}">
           <ul class="position-right">
-            <li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/4geeksacademy"><i class="fab fa-instagram"></i></a></li>
+            <li>${twitter}</li>
+            <li>${github}</li>
+            <li>${linkedin}</li>
+            <li>${instagram}</li>
           </ul>
         </div>
     `;
@@ -58,7 +77,7 @@ window.onload = function() {
     // this is the url for the profile avatar
     avatarURL: "https://randomuser.me/api/portraits/women/42.jpg",
     // social media bar position (left or right)
-    socialMediaPosition: "position-left",
+    socialMediaPosition: "variables.socialMediaPosition",
     // social media usernames
     twitter: null,
     github: "alesanchezr",
